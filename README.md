@@ -1,4 +1,4 @@
-# newman-reporter-slackmsg
+# newman-reporter-slackreporter
 
 Custom [Newman](https://github.com/postmanlabs/newman) reporter to send message to [Slack](https://slack.com/)
 
@@ -12,17 +12,17 @@ or
 
 ## Installation
  ```CLI
- npm i -g newman-reporter-slackmsg
+ npm i -g newman-reporter-slackreporter
  ```
 
 ## Usage
 ```CLI
- newman run <collectionFile> -e <environmentFile> --suppress-exit-code -r slackmsg --reporter-slackmsg-webhookurl '<webhookurl>'
+ newman run <collectionFile> -e <environmentFile> --suppress-exit-code -r slackreporter --reporter-slackreporterwebhookurl '<webhookurl>'
 ```
 
 ## Usage with channel override bot
 ```CLI
- newman run <collectionFile> -e <environmentFile> --suppress-exit-code -r slackmsg --reporter-slackmsg-webhookurl '<https://slack.com/api/chat.postMessage>' --reporter-slackmsg-token '<bearer token>' --reporter-slackmsg-chanel '<channel or userid>'
+ newman run <collectionFile> -e <environmentFile> --suppress-exit-code -r slackreporter --reporter-slackreporter-webhookurl '<https://slack.com/api/chat.postMessage>' --reporter-slackreporter-token '<bearer token>' --reporter-slackreporter-chanel '<channel or userid>'
 ```
 
 ## Reporter Options Optionals

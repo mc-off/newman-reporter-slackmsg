@@ -13,13 +13,11 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
         {
             "mrkdwn_in": ["text"],
             "color": "#FF0000",
-            "author_name": "Newman Tests",
+            "author_name": "API Tests",
             "title": ":fire: Failures :fire:",
             "fields": [
                 ${failMessage(parsedFailures)}
-            ],
-            "footer": "Smoke Test",
-            "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
+            ]
         }
     ]`
     let successMessage = `
@@ -27,7 +25,7 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
         {
             "mrkdwn_in": ["text"],
             "color": "#008000",
-            "author_name": "Newman Tests",
+            "author_name": "Automated API testing",
             "title": ":white_check_mark: All Passed :white_check_mark:",
             "footer": "Smoke Test",
             "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
