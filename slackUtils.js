@@ -26,9 +26,7 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
             "mrkdwn_in": ["text"],
             "color": "#008000",
             "author_name": "Automated API testing",
-            "title": ":white_check_mark: All Passed :white_check_mark:",
-            "footer": "Smoke Test",
-            "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
+            "title": ":white_check_mark: All Passed :white_check_mark:"
         }
     ]`
     return jsonminify(`
