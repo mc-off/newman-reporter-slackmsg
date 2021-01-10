@@ -5,7 +5,7 @@ var jsonminify = require("jsonminify");
 let messageSize;
 
 // creates message for slack
-function slackMessage(stats, timings, failures, maxMessageSize, collection, environment, channel) {
+function slackMessage(stats, timings, failures, maxMessageSize, collection, environment, channel, buildUrl) {
     messageSize = maxMessageSize;
     let parsedFailures = parseFailures(failures);
     let failureMessage = `
@@ -13,7 +13,7 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
         {
             "mrkdwn_in": ["text"],
             "color": "#FF0000",
-            "author_name": "Automatred API testing",
+            "author_name": "Automatred API Testing",
             "title": ":fire: Failures :fire:",
             "fields": [
                 ${failMessage(parsedFailures)}
@@ -25,7 +25,7 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
         {
             "mrkdwn_in": ["text"],
             "color": "#008000",
-            "author_name": "Automated API testing",
+            "author_name": "Automated API Testing",
             "title": ":white_check_mark: All Passed :white_check_mark:"
         }
     ]`
@@ -88,6 +88,13 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
                         "text": "${prettyms(timings.completed - timings.started)}"
                     },
                 ],
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "Details: ${buildUrl}"
+                }
             },
             {
                 "type": "divider"
@@ -178,7 +185,7 @@ function cleanErrorMessage(message, maxMessageSize) {
     filteredMessage = filteredMessage.replace('expected', 'Expected -')
     if (filteredMessage.length > maxMessageSize) {
         return `${filteredMessage.substring(0, maxMessageSize)}...`;
-    } 
+    }
     return filteredMessage;
 }
 
@@ -197,9 +204,11 @@ async function send(url, message, token) {
     let result;
     try {
         result = await axios(payload);
+        console.log(`Message are: ${message}`);
     } catch (e) {
         result = false;
         console.error(`Error in sending message to slack ${e}`);
+        console.log(`Message are: ${message}`);
     }
     return result;
 }
