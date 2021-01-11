@@ -93,7 +93,7 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "Details: ${buildUrl}"
+                    "text": "More Details: ${buildUrl}"
                 }
             },
             {
