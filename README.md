@@ -27,9 +27,10 @@ or
 
 ## Reporter Options Optionals
 ```
- --reporter-slackmsg-messageSize '<messageSize>' e.g 150
- --reporter-slackmsg-token '<bearer token>' e.g xoxb-XXXXXXXXXXXX-TTTTTTTTTTTTTT
- --reporter-slackmsg-chanel '<channel>' e.g #general
+ --reporter-slackreporter-messageSize '<messageSize>' e.g 150
+ --reporter-slackreporter-token '<bearer token>' e.g xoxb-XXXXXXXXXXXX-TTTTTTTTTTTTTT
+ --reporter-slackreporter-chanel '<channel>' e.g #general
+ --reporter-slackreporter-buildurl '<buildurl>' e.g ci build url 
 ```
 
 
@@ -51,3 +52,6 @@ Option to use bearer token for slack bots for channel override
 
 **channel**
 Option to select channel or user receive the result
+
+**buildurl**
+The circle ci build url, you can invoke the variable ${CIRCLE_BUILD_URL} 
