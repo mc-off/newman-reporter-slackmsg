@@ -20,7 +20,16 @@ function SlackNewmanReporter(emitter, reporterOptions) {
             return;
         }
         let run = summary.run;
-        slackUtils.send(webhookUrl, slackUtils.slackMessage(run.stats, run.timings, run.failures, messageSize, collection, environment, channel, buildUrl), token);
+        const str = webhookUrl.toString();
+        if(str.indexOf("#") == -1){
+            slackUtils.send(webhookUrl, slackUtils.slackMessage(run.stats, run.timings, run.failures, messageSize, collection, environment, channel, buildUrl), token);
+        } else {
+            const webhookUrls = webhookUrl.toString().split("#");
+            for (let i = 0; i < webhookUrls.length; i++) {
+                slackUtils.send(webhookUrls[i], slackUtils.slackMessage(run.stats, run.timings, run.failures, messageSize, collection, environment, channel, buildUrl), token);
+            }
+        }
+
     });
 
     function missingReporterOptions(reporterOptions) {
