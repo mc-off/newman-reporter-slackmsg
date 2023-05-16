@@ -66,27 +66,7 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
                     {
                         "type": "mrkdwn",
                         "text": "Test Failed:"
-                    },
-                    {
-                        "type": "mrkdwn",
-                        "text": "${parsedFailures.length}"
-                    },
-                    {
-                        "type": "mrkdwn",
-                        "text": "Test Assertions:"
-                    },
-                    {
-                        "type": "mrkdwn",
-                        "text": "Total: ${stats.assertions.total}  Failed: ${stats.assertions.failed}"
-                    },
-                    {
-                        "type": "mrkdwn",
-                        "text": "Test Duration:"
-                    },
-                    {
-                        "type": "mrkdwn",
-                        "text": "${prettyms(timings.completed - timings.started)}"
-                    },
+                    }
                 ],
             },
             {
