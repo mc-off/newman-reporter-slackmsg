@@ -25,7 +25,7 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
             "author_name": "Automated API Testing",
             "title": ":white_check_mark: All Passed :white_check_mark:"
         }
-    ]
+    ]`
     let moreDetailsMessage = `
     {
         "type": "section",          
