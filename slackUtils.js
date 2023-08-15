@@ -28,7 +28,18 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
             "author_name": "Automated API Testing",
             "title": ":white_check_mark: All Passed :white_check_mark:"
         }
-    ]`
+    ]
+    let moreDetailsMessage = `
+    {
+        "type": "section",          
+            "text": {
+                "type": "mrkdwn",
+                "text": "More Details: ${buildUrl}"
+            }
+    },
+        {             
+            "type": "divider"
+    },`
     return jsonminify(`
     {
         "channel": "${channel}",
@@ -73,16 +84,7 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
                     }
                 ],
             },
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": "More Details: ${buildUrl}"
-                }
-            },
-            {
-                "type": "divider"
-            },
+            ${parsedFailures.length > 0 ? moreDetailsMessage : ''}
         ],
         ${parsedFailures.length > 0 ? failureMessage : successMessage }
        }`);
