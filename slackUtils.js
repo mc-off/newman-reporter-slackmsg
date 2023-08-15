@@ -81,7 +81,7 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
                     },
                 ],
             },
-            ${failures.length > 0 ? moreDetailsMessage : ''}
+            // ${failures.length > 0 ? moreDetailsMessage : ''}
         ],
         ${failures.length > 0 ? failureMessage : successMessage }
        }`);
