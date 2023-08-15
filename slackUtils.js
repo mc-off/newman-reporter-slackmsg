@@ -66,6 +66,10 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
                     {
                         "type": "mrkdwn",
                         "text": "Test Failed:"
+                    },
+                    {
+                        "type": "mrkdwn",
+                        "text": "${parsedFailures.length}"
                     }
                 ],
             },
@@ -80,7 +84,7 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
                 "type": "divider"
             },
         ],
-        ${failures.length > 0 ? failureMessage : successMessage }
+        ${parsedFailures.length > 0 ? failureMessage : successMessage }
        }`);
 }
 
@@ -88,10 +92,10 @@ function collectionAndEnvironentFileBlock(collection, environment) {
     if (collection) {
         return `{
             "type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": "Collection: ${collection} \\n Environment: ${environment ? environment : '' }"
-			}
+      "text": {
+        "type": "mrkdwn",
+        "text": "Collection: ${collection} \\n Environment: ${environment ? environment : '' }"
+      }
         }, `
     }
     return '';
