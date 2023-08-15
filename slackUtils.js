@@ -78,12 +78,12 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
                     {
                         "type": "mrkdwn",
                         "text": "${parsedFailures.length}"
-                    }
+                    },
                 ],
             },
-            ${parsedFailures.length > 0 ? moreDetailsMessage : ''}
+            ${failures.length > 0 ? moreDetailsMessage : ''}
         ],
-        ${parsedFailures.length > 0 ? failureMessage : successMessage }
+        ${failures.length > 0 ? failureMessage : successMessage }
        }`);
 }
 
