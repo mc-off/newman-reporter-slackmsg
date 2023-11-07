@@ -13,8 +13,8 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
         {
             "mrkdwn_in": ["text"],
             "color": "#FF0000",
-            "author_name": "Automated API Testing",
-            "title": ":fire: Tests failed :fire:"
+            "author_name": "Conversation testing",
+            "title": ":fire: Conversation tests failed :fire:"
         }
     ]`
     let successMessage = `
