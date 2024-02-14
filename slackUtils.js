@@ -22,7 +22,7 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
         {
             "mrkdwn_in": ["text"],
             "color": "#008000",
-            "author_name": "Conversation testing",
+            "author_name": "Тупа тест",
             "title": ":white_check_mark: Conversation tests passed :white_check_mark:"
         }
     ]`
