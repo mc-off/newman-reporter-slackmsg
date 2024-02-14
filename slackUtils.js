@@ -22,7 +22,7 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
         {
             "mrkdwn_in": ["text"],
             "color": "#008000",
-            "author_name": "Conversation testing",
+            "author_name": "testing",
             "title": ":white_check_mark: Conversation tests passed :white_check_mark:"
         }
     ]`
@@ -38,8 +38,8 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
             "type": "divider"
     },`
     // if (collecion === "nluprod") 
-        if  (failures.length === 0) 
-            return null;
+    if  (failures.length === 0) 
+        return '';
     return jsonminify(`
     {
         "channel": "${channel}",
