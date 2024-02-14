@@ -37,54 +37,58 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
         {             
             "type": "divider"
     },`
-    return jsonminify(`
-    {
-        "channel": "${channel}",
-        "blocks": [
-            {
-                "type": "divider"
-            },
-            ${collectionAndEnvironentFileBlock(collection, environment)}
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": "*Test Summary*"
-                }
-            },
-            {
-                "type": "section",
-                "fields": [
-                    {
+    if (collecion == 'nluprod') 
+        if  (failures.length == 0) 
+            return null
+     else   
+        return jsonminify(`
+        {
+            "channel": "${channel}",
+            "blocks": [
+                {
+                    "type": "divider"
+                },
+                ${collectionAndEnvironentFileBlock(collection, environment)}
+                {
+                    "type": "section",
+                    "text": {
                         "type": "mrkdwn",
-                        "text": "Total Tests:"
-                    },
-                    {
-                        "type": "mrkdwn",
-                        "text": "${stats.requests.total}"
-                    },
-                    {
-                        "type": "mrkdwn",
-                        "text": "Test Passed:"
-                    },
-                    {
-                        "type": "mrkdwn",
-                        "text": "${stats.requests.total - parsedFailures.length}"
-                    },
-                    {
-                        "type": "mrkdwn",
-                        "text": "Test Failed:"
-                    },
-                    {
-                        "type": "mrkdwn",
-                        "text": "${parsedFailures.length}"
-                    },
-                ],
-            },
-            ${failures.length > 0 ? moreDetailsMessage : ''}
-        ],
-        ${failures.length > 0 ? failureMessage : successMessage }
-       }`);
+                        "text": "*Test Summary*"
+                    }
+                },
+                {
+                    "type": "section",
+                    "fields": [
+                        {
+                            "type": "mrkdwn",
+                            "text": "Total Tests:"
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": "${stats.requests.total}"
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": "Test Passed:"
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": "${stats.requests.total - parsedFailures.length}"
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": "Test Failed:"
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": "${parsedFailures.length}"
+                        },
+                    ],
+                },
+                ${failures.length > 0 ? moreDetailsMessage : ''}
+            ],
+            ${failures.length > 0 ? failureMessage : successMessage }
+           }`);
 }
 
 function collectionAndEnvironentFileBlock(collection, environment) {
@@ -175,23 +179,25 @@ function cleanErrorMessage(message, maxMessageSize) {
 
 // sends the message to slack via POST to webhook url
 async function send(url, message, token) {
-    const payload = {
-        method: 'POST',
-        url,
-        headers: {
-            'content-type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        },
-        data: message
-    };
-    let result;
-    try {
-        result = await axios(payload);
-    } catch (e) {
-        result = false;
-        console.error(`Error in sending message to slack ${e}`);
+    if (message) {
+        const payload = {
+            method: 'POST',
+            url,
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            data: message
+        };
+        let result;
+        try {
+            result = await axios(payload);
+        } catch (e) {
+            result = false;
+            console.error(`Error in sending message to slack ${e}`);
+        }
+        return result;
     }
-    return result;
 }
 
 exports.slackUtils = {
