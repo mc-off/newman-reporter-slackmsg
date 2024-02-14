@@ -37,10 +37,9 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
         {             
             "type": "divider"
     },`
-    if (collecion === "nluprod") {
+    // if (collecion === "nluprod") 
         if  (failures.length === 0) 
             return null;
-    }
     return jsonminify(`
     {
         "channel": "${channel}",
