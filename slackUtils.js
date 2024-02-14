@@ -37,9 +37,10 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
         {             
             "type": "divider"
     },`
-    // if (collecion === "nluprod") 
-    if  (failures.length === 0) 
-        return '';
+    if (collecion === "nluprod") {
+        if  (failures.length === 0) 
+            return '';
+    }
     return jsonminify(`
     {
         "channel": "${channel}",
@@ -178,25 +179,23 @@ function cleanErrorMessage(message, maxMessageSize) {
 
 // sends the message to slack via POST to webhook url
 async function send(url, message, token) {
-    if (message) {
-        const payload = {
-            method: 'POST',
-            url,
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': 'Bearer ' + token
-            },
-            data: message
-        };
-        let result;
-        try {
-            result = await axios(payload);
-        } catch (e) {
-            result = false;
-            console.error(`Error in sending message to slack ${e}`);
-        }
-        return result;
+    const payload = {
+        method: 'POST',
+        url,
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        data: message
+    };
+    let result;
+    try {
+        result = await axios(payload);
+    } catch (e) {
+        result = false;
+        console.error(`Error in sending message to slack ${e}`);
     }
+    return result;
 }
 
 exports.slackUtils = {
