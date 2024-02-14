@@ -37,58 +37,58 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
         {             
             "type": "divider"
     },`
-    if (collecion === "nluprod") 
+    if (collecion === "nluprod") {
         if  (failures.length === 0) 
             return null;
-     else   
-        return jsonminify(`
-        {
-            "channel": "${channel}",
-            "blocks": [
-                {
-                    "type": "divider"
-                },
-                ${collectionAndEnvironentFileBlock(collection, environment)}
-                {
-                    "type": "section",
-                    "text": {
+    }
+    return jsonminify(`
+    {
+        "channel": "${channel}",
+        "blocks": [
+            {
+                "type": "divider"
+            },
+            ${collectionAndEnvironentFileBlock(collection, environment)}
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*Test Summary*"
+                }
+            },
+            {
+                "type": "section",
+                "fields": [
+                    {
                         "type": "mrkdwn",
-                        "text": "*Test Summary*"
-                    }
-                },
-                {
-                    "type": "section",
-                    "fields": [
-                        {
-                            "type": "mrkdwn",
-                            "text": "Total Tests:"
-                        },
-                        {
-                            "type": "mrkdwn",
-                            "text": "${stats.requests.total}"
-                        },
-                        {
-                            "type": "mrkdwn",
-                            "text": "Test Passed:"
-                        },
-                        {
-                            "type": "mrkdwn",
-                            "text": "${stats.requests.total - parsedFailures.length}"
-                        },
-                        {
-                            "type": "mrkdwn",
-                            "text": "Test Failed:"
-                        },
-                        {
-                            "type": "mrkdwn",
-                            "text": "${parsedFailures.length}"
-                        },
-                    ],
-                },
-                ${failures.length > 0 ? moreDetailsMessage : ''}
-            ],
-            ${failures.length > 0 ? failureMessage : successMessage }
-           }`);
+                        "text": "Total Tests:"
+                    },
+                    {
+                        "type": "mrkdwn",
+                        "text": "${stats.requests.total}"
+                    },
+                    {
+                        "type": "mrkdwn",
+                        "text": "Test Passed:"
+                    },
+                    {
+                        "type": "mrkdwn",
+                        "text": "${stats.requests.total - parsedFailures.length}"
+                    },
+                    {
+                        "type": "mrkdwn",
+                        "text": "Test Failed:"
+                    },
+                    {
+                        "type": "mrkdwn",
+                        "text": "${parsedFailures.length}"
+                    },
+                ],
+            },
+            ${failures.length > 0 ? moreDetailsMessage : ''}
+        ],
+        ${failures.length > 0 ? failureMessage : successMessage }
+       }`);
 }
 
 function collectionAndEnvironentFileBlock(collection, environment) {
