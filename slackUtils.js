@@ -37,12 +37,8 @@ function slackMessage(stats, timings, failures, maxMessageSize, collection, envi
         {             
             "type": "divider"
     },`
-    console.log(collection);
-    console.log(failures.length);
-    console.log(collection == 'nluprod');
-    console.log(failures.length == 0);
-    if (collecion == "nluprod") 
-        if  (failures.length == 0) 
+    if (collecion === "nluprod") 
+        if  (failures.length === 0) 
             return null;
      else   
         return jsonminify(`
